@@ -54,7 +54,7 @@ export const blockUser = async (id: string) => {
     },
   });
 
-  if (!existingBlock) {
+  if (existingBlock) {
     throw new Error("Already blocked");
   }
 
@@ -96,7 +96,7 @@ export const unBlockUser = async (id: string) => {
   });
 
   if (!existingBlock) {
-    throw new Error("Already blocked");
+    throw new Error("Already unblocked");
   }
 
   const unBlock = await db.block.delete({
