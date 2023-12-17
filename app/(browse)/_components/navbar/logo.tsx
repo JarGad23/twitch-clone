@@ -9,7 +9,11 @@ const font = Poppins({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
 
-export const Logo = () => {
+interface LogoProps {
+  isInDashboardView: boolean;
+}
+
+export const Logo = ({ isInDashboardView }: LogoProps) => {
   return (
     <Link href="/">
       <div className="flex items-center gap-x-4 hover:opacity-75 transition">
@@ -18,7 +22,9 @@ export const Logo = () => {
         </div>
         <div className={cn("hidden lg:block", font.className)}>
           <p className="text-lg font-semibold">Gamehub</p>
-          <p className="text-sm text-muted-foreground">Let&apos;s play</p>
+          <p className="text-sm text-muted-foreground">
+            {isInDashboardView ? "Creator Dashboard" : "Let's play"}
+          </p>
         </div>
       </div>
     </Link>

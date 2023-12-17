@@ -6,7 +6,7 @@ import { Sidebar, SidebarSkeleton } from "./_components/sidebar";
 const BrowseLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <Navbar />
+      <Navbar isInDashboardView={false} />
       <div className="flex h-full pt-20">
         <Suspense fallback={<SidebarSkeleton />}>
           <Sidebar />
