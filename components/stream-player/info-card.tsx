@@ -51,7 +51,12 @@ export const InfoCard = ({
             <p className="text-sm font-semibold">
               {thumbnailUrl ? (
                 <div className="relative aspect-video rounded-md overflow-hidden w-[200px] border border-white/10">
-                  <Image fill src={thumbnailUrl} alt={name} />
+                  <Image
+                    fill
+                    src={thumbnailUrl}
+                    alt={name}
+                    className="object-cover"
+                  />
                 </div>
               ) : null}
             </p>
