@@ -37,7 +37,6 @@ export const Chat = ({
   const { variant, onExpand } = useChatSidebar((state) => state);
   const connectionState = useConnectionState();
   const participant = useRemoteParticipant(hostIdentity);
-
   const isOnline = participant && connectionState === ConnectionState.Connected;
   const isHidden = !isChatEnabled || !isOnline;
 
