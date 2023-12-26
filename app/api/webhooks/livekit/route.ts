@@ -1,17 +1,16 @@
 import { headers } from "next/headers";
 import { WebhookReceiver } from "livekit-server-sdk";
+
 import { db } from "@/lib/db";
 
-if (!process.env.LIVEKIT_API_KEY || !process.env.LIVEKIT_API_SECRET)
-  throw new Error("Missing API keys");
-
-const reciver = new WebhookReceiver(
-  process.env.LIVEKIT_API_KEY,
-  process.env.LIVEKIT_API_SECRET
+const receiver = new WebhookReceiver(
+  process.env.LIVEKIT_API_KEY!,
+  process.env.LIVEKIT_API_SECRET!
 );
 
 export async function POST(req: Request) {
   const body = await req.text();
+
   const headerPayload = headers();
   const authorization = headerPayload.get("Authorization");
 
@@ -19,18 +18,7 @@ export async function POST(req: Request) {
     return new Response("No authorization header", { status: 400 });
   }
 
-  const event = reciver.receive(body, authorization);
-
-  if (event.event === "ingress_ended") {
-    await db.stream.update({
-      where: {
-        ingressId: event.ingressInfo?.ingressId,
-      },
-      data: {
-        isLive: false,
-      },
-    });
-  }
+  const event = receiver.receive(body, authorization);
 
   if (event.event === "ingress_started") {
     await db.stream.update({
@@ -43,5 +31,14 @@ export async function POST(req: Request) {
     });
   }
 
-  return new Response("OK", { status: 200 });
+  if (event.event === "ingress_ended") {
+    await db.stream.update({
+      where: {
+        ingressId: event.ingressInfo?.ingressId,
+      },
+      data: {
+        isLive: false,
+      },
+    });
+  }
 }
