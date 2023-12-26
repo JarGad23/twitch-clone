@@ -1,6 +1,6 @@
 "use client";
 
-import { VefiedMark } from "../verified-mark";
+import { VerifiedMark } from "../verified-mark";
 import { BioModal } from "./bio-modal";
 
 interface AboutCardProps {
@@ -28,7 +28,7 @@ export const AboutCard = ({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-x-2 font-semibold text-lg lg:text-2xl">
             About {hostName}
-            <VefiedMark />
+            <VerifiedMark />
           </div>
           {isHost ? <BioModal initialValue={bio} /> : null}
         </div>

@@ -2,7 +2,7 @@
 
 import { UserIcon } from "lucide-react";
 import { UserAvatar, UserAvatarSkeleton } from "../user-avatar";
-import { VefiedMark } from "../verified-mark";
+import { VerifiedMark } from "../verified-mark";
 import {
   useParticipants,
   useRemoteParticipant,
@@ -49,7 +49,7 @@ export const Header = ({
         <div className="space-y-1">
           <div className="flex items-center gap-x-2">
             <h2 className="text-lg font-semibold">{hostName}</h2>
-            <VefiedMark />
+            <VerifiedMark />
           </div>
           <p className="text-sm font-semibold">{name}</p>
           {isLive ? (
