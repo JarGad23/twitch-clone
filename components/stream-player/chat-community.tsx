@@ -28,14 +28,6 @@ export const ChatCommunity = ({
     setValue(newValue);
   };
 
-  if (isHidden) {
-    return (
-      <div className="flex flex-1 items-center justify-center">
-        <p className="text-sm text-muted-foreground">Community is disabled</p>
-      </div>
-    );
-  }
-
   const filterParticipants = useMemo(() => {
     const deduped = participants.reduce((acc, participant) => {
       const hostAsViewer = `host-${participant.identity}`;
@@ -52,6 +44,14 @@ export const ChatCommunity = ({
         .includes(debouncedValue.toLowerCase());
     });
   }, [participants, debouncedValue]);
+
+  if (isHidden) {
+    return (
+      <div className="flex flex-1 items-center justify-center">
+        <p className="text-sm text-muted-foreground">Community is disabled</p>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4">
